@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
             }
-        }); */
+        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
