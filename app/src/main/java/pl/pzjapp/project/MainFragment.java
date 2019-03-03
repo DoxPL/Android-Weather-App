@@ -2,13 +2,18 @@ package pl.pzjapp.project;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Iterator;
 
 public class MainFragment extends Fragment {
 
@@ -48,13 +53,33 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button btnExample = (Button) view.findViewById(R.id.btnExample);
+        Button btnExample = view.findViewById(R.id.btnExample);
+        TextView tv = view.findViewById(R.id.text);
         btnExample.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Hello world!", Toast.LENGTH_LONG).show();
             }
         });
+        try {
+            DataDownloader dataDownloader = new DataDownloader(44418);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                dataDownloader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            else
+                dataDownloader.execute();
+
+            StringBuilder txt = new StringBuilder();
+            for (DataModel item : dataDownloader.getList()) {
+                txt.append(item.getHumidity() + "\n");
+                txt.append(item.getWindSpeed() + "\n");
+                txt.append(item.getPressure() + "\n");
+            }
+            tv.setText(txt.toString());
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }
