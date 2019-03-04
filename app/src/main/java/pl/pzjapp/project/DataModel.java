@@ -1,9 +1,9 @@
 package pl.pzjapp.project;
 
 public class DataModel {
-    private String city;
-    private int id, temperature;
-    private float windSpeed, pressure, humidity;
+    private String city, country, date, iconRef;
+    private int cityId;
+    private float windSpeed, pressure, humidity, temp, tempMin, tempMax;
 
     public String getCity() {
         return city;
@@ -13,20 +13,36 @@ public class DataModel {
         this.city = city;
     }
 
-    public int getId() {
-        return id;
+    public String getCountry() {
+        return country;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public int getTemperature() {
-        return temperature;
+    public String getDate() {
+        return date;
     }
 
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getIconRef() {
+        return iconRef;
+    }
+
+    public void setIconRef(String iconRef) {
+        this.iconRef = iconRef;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public float getWindSpeed() {
@@ -51,5 +67,29 @@ public class DataModel {
 
     public void setHumidity(float humidity) {
         this.humidity = humidity;
+    }
+
+    public float getTemp() {
+        return temp;
+    }
+
+    public void setTemp(float temp) {
+        this.temp = temp;
+    }
+
+    public float getTempMin() {
+        return tempMin;
+    }
+
+    public void setTempMin(float tempMin) {
+        this.tempMin = tempMin;
+    }
+
+    public float getTempMax() {
+        return tempMax;
+    }
+
+    public void setTempMax(float tempMax) {
+        this.tempMax = tempMax;
     }
 }

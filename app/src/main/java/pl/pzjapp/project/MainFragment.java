@@ -10,16 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MainFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    protected static ProgressBar pb;
+    public static TextView tv;
     private String mParam1;
     private String mParam2;
 
@@ -54,33 +66,26 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         Button btnExample = view.findViewById(R.id.btnExample);
-        TextView tv = view.findViewById(R.id.text);
+        tv = view.findViewById(R.id.text);
+        pb = view.findViewById(R.id.pb);
+
+
         btnExample.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Hello world!", Toast.LENGTH_LONG).show();
+                DataDownloader downloaderTask = null;
+                try {
+                    downloaderTask = new DataDownloader(524901);
+                    downloaderTask.execute();
+
+                }
+                catch(Exception e)
+                {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
-        try {
-            DataDownloader dataDownloader = new DataDownloader(44418);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                dataDownloader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            else
-                dataDownloader.execute();
-
-            StringBuilder txt = new StringBuilder();
-            for (DataModel item : dataDownloader.getList()) {
-                txt.append(item.getHumidity() + "\n");
-                txt.append(item.getWindSpeed() + "\n");
-                txt.append(item.getPressure() + "\n");
-            }
-            tv.setText(txt.toString());
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
         return view;
     }
 
@@ -105,4 +110,5 @@ public class MainFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }
