@@ -1,4 +1,4 @@
-package pl.pzjapp.project;
+package pl.pzjapp.project.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import pl.pzjapp.project.R;
 
 public class MainFragment extends Fragment {
 
