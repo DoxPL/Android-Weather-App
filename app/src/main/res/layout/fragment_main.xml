@@ -23,7 +23,7 @@
             android:id="@+id/btnExample"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kliknij"
+            android:text="Download data"
             tools:layout_editor_absoluteX="161dp"
             tools:layout_editor_absoluteY="312dp" />
 

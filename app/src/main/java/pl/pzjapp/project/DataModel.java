@@ -1,9 +1,18 @@
 package pl.pzjapp.project;
 
 public class DataModel {
-    private String city, country, date, weatherState, iconRef;
+    private String city;
+    private String country;
+    private String date;
+    private String weatherState;
+    private String iconRef;
     private int cityId;
-    private float windSpeed, pressure, humidity, temp, tempMin, tempMax;
+    private float windSpeed;
+    private float pressure;
+    private float humidity;
+    private float temp;
+    private float tempMin;
+    private float tempMax;
 
     public String getCity() {
         return city;

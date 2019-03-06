@@ -1,9 +1,11 @@
 package pl.pzjapp.project;
 
 import android.os.AsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,20 +14,13 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class DataDownloader extends AsyncTask<Void, Void, Void> {
-    private int cityId, limit;
+    private int cityId;
+    private int limit;
     private ArrayList<DataModel> data;
     private static final String APIKEY = "809d268c6dc02962f896e66e442616cd";
     public AsyncResultListener asyncResultListener = null;
 
-    public DataDownloader(int cityId, AsyncResultListener asyncResultListener)
-    {
-        this.cityId = cityId;
-        this.asyncResultListener = asyncResultListener;
-        this.limit = 0;
-    }
-
-    public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener)
-    {
+    public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener) {
         this.cityId = cityId;
         this.asyncResultListener = asyncResultListener;
         this.limit = limit;
@@ -48,8 +43,19 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
                 stringBuilder.append(line);
             }
 
-            JSONObject mainJsonObject = new JSONObject(stringBuilder.toString());
-            String city= mainJsonObject.getJSONObject("city").getString("name");
+            parseJSON(stringBuilder);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected void parseJSON(StringBuilder code)
+    {
+        try {
+            JSONObject mainJsonObject = new JSONObject(code.toString());
+            String city = mainJsonObject.getJSONObject("city").getString("name");
             String country = mainJsonObject.getJSONObject("city").getString("country");
             JSONArray jsonArray = mainJsonObject.getJSONArray("list");
             int n = jsonArray.length();
@@ -73,15 +79,10 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
                 data.add(tmp);
             }
         }
-        catch (IOException e)
+        catch(JSONException e)
         {
             e.printStackTrace();
         }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
@@ -89,5 +90,4 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(aVoid);
         asyncResultListener.fillView(data);
     }
-
 }
