@@ -1,11 +1,13 @@
-package pl.pzjapp.project.persistence;
+package pl.pzjapp.project.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "preset")
-public class Preset {
+import java.io.Serializable;
+
+@Entity
+public class Preset implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -13,7 +15,7 @@ public class Preset {
     private String name;
 
     public Preset() {
-    }//TODO: Validate if default constructor is enough for the Android Persistence module.
+    }
 
     public String getName() {
         return name;
@@ -21,5 +23,9 @@ public class Preset {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 }
