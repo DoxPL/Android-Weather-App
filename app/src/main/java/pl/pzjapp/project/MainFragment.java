@@ -2,8 +2,6 @@ package pl.pzjapp.project;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,24 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AsyncResultListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    protected static ProgressBar pb;
-    public static TextView tv;
+    private TextView tv;
     private String mParam1;
     private String mParam2;
 
@@ -67,8 +54,6 @@ public class MainFragment extends Fragment {
 
         Button btnExample = view.findViewById(R.id.btnExample);
         tv = view.findViewById(R.id.text);
-        pb = view.findViewById(R.id.pb);
-
 
         btnExample.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +61,7 @@ public class MainFragment extends Fragment {
                 Toast.makeText(getContext(), "Hello world!", Toast.LENGTH_LONG).show();
                 DataDownloader downloaderTask = null;
                 try {
-                    downloaderTask = new DataDownloader(524901);
+                    downloaderTask = new DataDownloader(524901, 2,MainFragment.this);
                     downloaderTask.execute();
 
                 }
@@ -87,6 +72,24 @@ public class MainFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void fillView(ArrayList<DataModel> data) {
+        for(DataModel item : data)
+        {
+            tv.append("\nCity: " + item.getCity());
+            tv.append("\nCountry: " + item.getCountry());
+            tv.append("\nWeather state: " + item.getWeatherState());
+            tv.append("\nHumidity: " + item.getHumidity());
+            tv.append("\nPressure: " + item.getPressure());
+            tv.append("\nTemp: " + item.getTemp());
+            tv.append("\nTempMin: " + item.getTempMin());
+            tv.append("\nTempMax: " + item.getTempMax());
+            tv.append("\nWind speed: " + item.getWindSpeed());
+            tv.append("\nIcon: " + item.getIconRef());
+            tv.append("\nDate: " + item.getDate() + "\n");
+        }
     }
 
     public void onButtonPressed(Uri uri) {

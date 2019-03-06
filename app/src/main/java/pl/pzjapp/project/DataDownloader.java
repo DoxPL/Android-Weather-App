@@ -12,22 +12,32 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class DataDownloader extends AsyncTask<Void, Void, Void> {
-    private int cityId;
+    private int cityId, limit;
     private ArrayList<DataModel> data;
     private static final String APIKEY = "809d268c6dc02962f896e66e442616cd";
+    public AsyncResultListener asyncResultListener = null;
 
-    public DataDownloader(int cityId)
+    public DataDownloader(int cityId, AsyncResultListener asyncResultListener)
     {
         this.cityId = cityId;
-        data = new ArrayList<DataModel>();
+        this.asyncResultListener = asyncResultListener;
+        this.limit = 0;
+    }
+
+    public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener)
+    {
+        this.cityId = cityId;
+        this.asyncResultListener = asyncResultListener;
+        this.limit = limit;
     }
 
     protected Void doInBackground(Void... params) {
+        data = new ArrayList<DataModel>();
         URL url = null;
         HttpURLConnection connection = null;
         try {
             url = new URL("http://api.openweathermap.org/data/2.5/forecast?id=" + this.cityId +
-                    "&appid=" + APIKEY);
+                    "&units=metric&appid=" + APIKEY);
             connection = (HttpURLConnection) url.openConnection();
             BufferedReader buffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
@@ -38,13 +48,20 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
                 stringBuilder.append(line);
             }
 
-
-            JSONArray jsonArray = new JSONObject(stringBuilder.toString()).getJSONArray("list");
-            for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject mainJsonObject = new JSONObject(stringBuilder.toString());
+            String city= mainJsonObject.getJSONObject("city").getString("name");
+            String country = mainJsonObject.getJSONObject("city").getString("country");
+            JSONArray jsonArray = mainJsonObject.getJSONArray("list");
+            int n = jsonArray.length();
+            for (int i = (limit != 0) ? n - limit : 0; i < n; i++) {
                 JSONObject mainObject = (JSONObject) jsonArray.getJSONObject(i).get("main");
                 JSONObject windObject = (JSONObject) jsonArray.getJSONObject(i).get("wind");
                 JSONArray weatherArray = jsonArray.getJSONObject(i).getJSONArray("weather");
                 DataModel tmp = new DataModel();
+                tmp.setCity(city);
+                tmp.setCityId(this.cityId);
+                tmp.setCountry(country);
+                tmp.setWeatherState((weatherArray.getJSONObject(0).getString("description")));
                 tmp.setTemp((float) mainObject.getDouble("temp"));
                 tmp.setTempMin((float) mainObject.getDouble("temp_min"));
                 tmp.setTempMax((float) mainObject.getDouble("temp_max"));
@@ -70,21 +87,7 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        for(DataModel item : data)
-        {
-            MainFragment.tv.append("\nHumidity: " + item.getHumidity());
-            MainFragment.tv.append("\nPressure: " + item.getPressure());
-            MainFragment.tv.append("\nTemp: " + item.getTemp());
-            MainFragment.tv.append("\nTempMin: " + item.getTempMin());
-            MainFragment.tv.append("\nTempMax: " + item.getTempMax());
-            MainFragment.tv.append("\nWind speed: " + item.getWindSpeed());
-            MainFragment.tv.append("\nIcon: " + item.getIconRef());
-            MainFragment.tv.append("\nDate: " + item.getDate() + "\n");
-        }
+        asyncResultListener.fillView(data);
     }
 
-    public ArrayList<DataModel> getList()
-    {
-        return this.data;
-    }
 }

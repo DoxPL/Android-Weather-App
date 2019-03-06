@@ -1,7 +1,7 @@
 package pl.pzjapp.project;
 
 public class DataModel {
-    private String city, country, date, iconRef;
+    private String city, country, date, weatherState, iconRef;
     private int cityId;
     private float windSpeed, pressure, humidity, temp, tempMin, tempMax;
 
@@ -91,5 +91,13 @@ public class DataModel {
 
     public void setTempMax(float tempMax) {
         this.tempMax = tempMax;
+    }
+
+    public String getWeatherState() {
+        return weatherState;
+    }
+
+    public void setWeatherState(String weatherState) {
+        this.weatherState = weatherState;
     }
 }
