@@ -41,9 +41,10 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
             connection = (HttpURLConnection) url.openConnection();
             BufferedReader buffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            line = buffer.readLine();
-            stringBuilder.append(line);
+            String line = null;
+            while ((line = buffer.readLine()) != null) {
+                stringBuilder.append(line);
+            }
             data = utils.parseJSON(stringBuilder, limit);
         } catch (IOException e) {
             e.printStackTrace();
