@@ -14,8 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import pl.pzjapp.project.MainFragment;
 import pl.pzjapp.project.R;
-import pl.pzjapp.project.fragments.MainFragment;
 import pl.pzjapp.project.fragments.OtherFragment;
 
 public class MainActivity extends AppCompatActivity
