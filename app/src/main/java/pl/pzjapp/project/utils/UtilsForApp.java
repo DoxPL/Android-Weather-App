@@ -76,7 +76,7 @@ public class UtilsForApp {
                     JSONObject mainObject = (JSONObject) jsonArray.getJSONObject(i).get("main");
                     JSONObject windObject = (JSONObject) jsonArray.getJSONObject(i).get("wind");
                     JSONArray weatherArray = jsonArray.getJSONObject(i).getJSONArray("weather");
-                    DataModel temporaryModel = setDataModeInfo(city, country, jsonArray, i, mainObject, windObject, weatherArray);
+                    DataModel temporaryModel = setDataModeInfo(city, country, jsonArray, i, mainObject);
                     data.add(temporaryModel);
                 }
             }
@@ -86,20 +86,20 @@ public class UtilsForApp {
         return data;
     }
 
-    private DataModel setDataModeInfo(String city, String country, JSONArray jsonArray, int i, JSONObject mainObject, JSONObject windObject, JSONArray weatherArray) throws JSONException {
+    private DataModel setDataModeInfo(String city, String country, JSONArray jsonArray, int i, JSONObject mainObject) throws JSONException {
         DataModel temporaryModel = new DataModel();
         temporaryModel.setCity(city);
         temporaryModel.setCityId(mainObject.getInt("id"));
         temporaryModel.setCountry(country);
-        temporaryModel.setWeatherState((weatherArray.getJSONObject(0).getString("description")));
+        temporaryModel.setWeatherState((jsonArray.getJSONObject(0).getString("description")));
         temporaryModel.setTemp((float) mainObject.getDouble("temp"));
         temporaryModel.setTempMin((float) mainObject.getDouble("temp_min"));
         temporaryModel.setTempMax((float) mainObject.getDouble("temp_max"));
         temporaryModel.setHumidity((float) mainObject.getDouble("humidity"));
         temporaryModel.setPressure((float) mainObject.getDouble("pressure"));
-        temporaryModel.setWindSpeed((float) windObject.getDouble("speed"));
+        temporaryModel.setWindSpeed((float) mainObject.getDouble("speed"));
         temporaryModel.setDate((String) jsonArray.getJSONObject(i).get("dt_txt"));
-        temporaryModel.setIconRef(weatherArray.getJSONObject(0).getString("icon"));
+        temporaryModel.setIconRef(jsonArray.getJSONObject(0).getString("icon"));
         return temporaryModel;
     }
 }
