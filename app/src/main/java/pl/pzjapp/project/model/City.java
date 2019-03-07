@@ -43,6 +43,10 @@ public class City implements Serializable {
         this.temperature = temperature;
     }
 
+    public City() {
+
+    }
+
     public static class CityBuilder {
         private String city;
         private String country;
