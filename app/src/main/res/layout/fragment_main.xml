@@ -23,8 +23,15 @@
             android:id="@+id/btnExample"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kliknij"
+            android:text="Download data"
             tools:layout_editor_absoluteX="161dp"
             tools:layout_editor_absoluteY="312dp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weather data:" />
+
     </LinearLayout>
 </FrameLayout>
