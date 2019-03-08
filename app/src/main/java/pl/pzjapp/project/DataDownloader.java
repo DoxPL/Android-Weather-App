@@ -2,10 +2,6 @@ package pl.pzjapp.project;
 
 import android.os.AsyncTask;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +37,7 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
             connection = (HttpURLConnection) url.openConnection();
             BufferedReader buffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = buffer.readLine()) != null) {
                 stringBuilder.append(line);
             }

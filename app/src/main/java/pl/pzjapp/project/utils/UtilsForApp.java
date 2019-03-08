@@ -1,6 +1,6 @@
 package pl.pzjapp.project.utils;
 
-import android.provider.ContactsContract;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import java.util.Properties;
 import pl.pzjapp.project.DataModel;
 
 public class UtilsForApp {
-
+    private static final String FILE_PATH = "config.properties";
     Properties properties;
 
     public UtilsForApp(Properties properties) {
@@ -47,18 +47,20 @@ public class UtilsForApp {
      * @return
      */
     public static UtilsForApp fromTestConfigFile() {
-        return new UtilsForApp(readProperties("/config.properties"));
+        return new UtilsForApp(readProperties(FILE_PATH));
     }
 
     public static Properties readProperties(String filePath) {
+        Log.e(filePath, "error");
         Properties propertiesFromFile = new Properties();
         try {
-            propertiesFromFile.load(UtilsForApp.class.getResourceAsStream(filePath));
-        } catch (IOException ex) {
-            throw new IllegalStateException("Cannot read test configuration file. Error: " + ex.getMessage(), ex);
+            ClassLoader classLoaderForUtils = UtilsForApp.class.getClassLoader();
+            if (classLoaderForUtils != null)
+                propertiesFromFile.load(classLoaderForUtils.getResourceAsStream(filePath));
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot read test configuration file. Error: " + e.getMessage(), e);
         }
-
-        propertiesFromFile.putAll(System.getProperties());
+        Log.i("PROPERTIES:", propertiesFromFile.toString());
         return propertiesFromFile;
     }
 
