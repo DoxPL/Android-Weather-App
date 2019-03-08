@@ -17,7 +17,7 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
 
     private int cityId;
     private int limit;
-    private ArrayList<DataModel> data;
+    private ArrayList<WeatherDataModel> data;
     private UtilsForApp utils = new UtilsForApp();
     public AsyncResultListener asyncResultListener;
 
@@ -41,7 +41,7 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
             while ((line = buffer.readLine()) != null) {
                 stringBuilder.append(line);
             }
-            data = utils.parseJSON(stringBuilder, limit);
+            data = utils.parseJSON(stringBuilder, limit, cityId);
         } catch (IOException e) {
             e.printStackTrace();
         }

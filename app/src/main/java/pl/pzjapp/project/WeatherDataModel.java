@@ -1,12 +1,12 @@
 package pl.pzjapp.project;
 
-public class DataModel {
-    private String city;
-    private String country;
+import pl.pzjapp.project.model.CityDataModel;
+
+public class WeatherDataModel {
+    CityDataModel cityData;
     private String date;
     private String weatherState;
     private String iconRef;
-    private int cityId;
     private float windSpeed;
     private float pressure;
     private float humidity;
@@ -14,20 +14,12 @@ public class DataModel {
     private float tempMin;
     private float tempMax;
 
-    public String getCity() {
-        return city;
+    public CityDataModel getCityData() {
+        return cityData;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCityData(CityDataModel cityData) {
+        this.cityData = cityData;
     }
 
     public String getDate() {
@@ -44,14 +36,6 @@ public class DataModel {
 
     public void setIconRef(String iconRef) {
         this.iconRef = iconRef;
-    }
-
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
     }
 
     public float getWindSpeed() {

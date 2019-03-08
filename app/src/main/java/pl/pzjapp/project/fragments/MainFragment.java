@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import pl.pzjapp.project.AsyncResultListener;
 import pl.pzjapp.project.DataDownloader;
-import pl.pzjapp.project.DataModel;
+import pl.pzjapp.project.WeatherDataModel;
 import pl.pzjapp.project.R;
 
 public class MainFragment extends Fragment implements AsyncResultListener {
@@ -55,11 +55,11 @@ public class MainFragment extends Fragment implements AsyncResultListener {
     }
 
     @Override
-    public void fillView(ArrayList<DataModel> data) {
-        for(DataModel item : data)
+    public void fillView(ArrayList<WeatherDataModel> data) {
+        for(WeatherDataModel item : data)
         {
-            testTextView.append("\nCity: " + item.getCity());
-            testTextView.append("\nCountry: " + item.getCountry());
+            testTextView.append("\nCity: " + item.getCityData().getCityName());
+            testTextView.append("\nCountry: " + item.getCityData().getCountry());
             testTextView.append("\nWeather state: " + item.getWeatherState());
             testTextView.append("\nHumidity: " + item.getHumidity());
             testTextView.append("\nPressure: " + item.getPressure());
