@@ -1,4 +1,4 @@
-package pl.pzjapp.project;
+package pl.pzjapp.project.model;
 
 import pl.pzjapp.project.model.CityDataModel;
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import pl.pzjapp.project.WeatherDataModel;
+import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.model.CityDataModel;
 
 public class UtilsForApp {

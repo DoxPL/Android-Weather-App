@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.utils.UtilsForApp;
 
 public class DataDownloader extends AsyncTask<Void, Void, Void> {

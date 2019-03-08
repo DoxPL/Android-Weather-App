@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import pl.pzjapp.project.AsyncResultListener;
 import pl.pzjapp.project.DataDownloader;
-import pl.pzjapp.project.WeatherDataModel;
+import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.R;
 
 public class MainFragment extends Fragment implements AsyncResultListener {
