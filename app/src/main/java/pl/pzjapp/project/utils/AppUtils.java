@@ -10,18 +10,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.model.CityDataModel;
+import pl.pzjapp.project.model.WeatherDataModel;
 
-public class UtilsForApp {
+public class AppUtils {
     private static final String FILE_PATH = "config.properties";
     Properties properties;
 
-    public UtilsForApp(Properties properties) {
+    public AppUtils(Properties properties) {
         this.properties = properties;
     }
 
-    public UtilsForApp() {
+    public AppUtils() {
 
     }
 
@@ -47,21 +47,21 @@ public class UtilsForApp {
      *
      * @return
      */
-    public static UtilsForApp fromTestConfigFile() {
-        return new UtilsForApp(readProperties(FILE_PATH));
+    public static AppUtils fromTestConfigFile() {
+        return new AppUtils(readProperties(FILE_PATH));
     }
 
     public static Properties readProperties(String filePath) {
-        Log.e(filePath, "error");
         Properties propertiesFromFile = new Properties();
         try {
-            ClassLoader classLoaderForUtils = UtilsForApp.class.getClassLoader();
+            ClassLoader classLoaderForUtils = AppUtils.class.getClassLoader();
             if (classLoaderForUtils != null)
                 propertiesFromFile.load(classLoaderForUtils.getResourceAsStream(filePath));
         } catch (IOException e) {
             throw new IllegalStateException("Cannot read test configuration file. Error: " + e.getMessage(), e);
         }
-        Log.i("PROPERTIES:", propertiesFromFile.toString());
+
+        propertiesFromFile.putAll(System.getProperties());
         return propertiesFromFile;
     }
 
@@ -80,6 +80,7 @@ public class UtilsForApp {
                 for (int i = n - limit; i < n; i++) {
                     JSONObject mainObject = (JSONObject) jsonArray.getJSONObject(i).get("main");
                     WeatherDataModel temporaryModel = setDataModeInfo(cityData, jsonArray, i, mainObject);
+                    Log.d("Model", temporaryModel.toString());
                     data.add(temporaryModel);
                 }
             }
@@ -105,4 +106,5 @@ public class UtilsForApp {
         temporaryModel.setIconRef(weatherArray.getJSONObject(0).getString("icon"));
         return temporaryModel;
     }
+
 }

@@ -93,4 +93,20 @@ public class WeatherDataModel {
     public void setWeatherState(String weatherState) {
         this.weatherState = weatherState;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherDataModel{" +
+                "cityData=" + cityData +
+                ", date='" + date + '\'' +
+                ", weatherState='" + weatherState + '\'' +
+                ", iconRef='" + iconRef + '\'' +
+                ", windSpeed=" + windSpeed +
+                ", pressure=" + pressure +
+                ", humidity=" + humidity +
+                ", temp=" + temp +
+                ", tempMin=" + tempMin +
+                ", tempMax=" + tempMax +
+                '}';
+    }
 }

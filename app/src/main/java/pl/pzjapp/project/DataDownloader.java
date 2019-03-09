@@ -10,16 +10,16 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import pl.pzjapp.project.model.WeatherDataModel;
-import pl.pzjapp.project.utils.UtilsForApp;
+import pl.pzjapp.project.utils.AppUtils;
 
 public class DataDownloader extends AsyncTask<Void, Void, Void> {
-    private static final UtilsForApp CONFIG = UtilsForApp.fromTestConfigFile();
+    private static final AppUtils CONFIG = AppUtils.fromTestConfigFile();
     private static final String APIKEY = CONFIG.get("api.key");
 
     private int cityId;
     private int limit;
     private ArrayList<WeatherDataModel> data;
-    private UtilsForApp utils = new UtilsForApp();
+    private AppUtils utils = new AppUtils();
     public AsyncResultListener asyncResultListener;
 
     public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener) {
@@ -54,4 +54,5 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(aVoid);
         asyncResultListener.fillView(data);
     }
+
 }
