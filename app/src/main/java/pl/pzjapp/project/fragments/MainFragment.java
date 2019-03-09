@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,10 @@ import java.util.ArrayList;
 
 import pl.pzjapp.project.AsyncResultListener;
 import pl.pzjapp.project.DataDownloader;
+import pl.pzjapp.project.model.CityDataModel;
 import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.R;
+import pl.pzjapp.project.tools.WeatherStatesAdapter;
 
 public class MainFragment extends Fragment implements AsyncResultListener {
     private TextView testTextView;
@@ -39,6 +43,19 @@ public class MainFragment extends Fragment implements AsyncResultListener {
         //TODO Create RecyclerView with items that represents weather data
 
         //This is a test definition, that will be replaced by correct code.
+        ArrayList<WeatherDataModel> testList = new ArrayList<>();
+        WeatherDataModel testModel = new WeatherDataModel();
+        CityDataModel testCity = new CityDataModel();
+        testCity.setCityName("Example city");
+        testModel.setCityData(new CityDataModel());
+        testList.add(testModel);
+        //
+
+        RecyclerView rvWeatherStates = view.findViewById(R.id.rvWeatherStates);
+        WeatherStatesAdapter adapter = new WeatherStatesAdapter(getContext(), testList);
+        rvWeatherStates.setHasFixedSize(true);
+        rvWeatherStates.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvWeatherStates.setAdapter(adapter);
         Button btnExample = view.findViewById(R.id.btnExample);
         testTextView = view.findViewById(R.id.text);
 

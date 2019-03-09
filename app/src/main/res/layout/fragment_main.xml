@@ -33,5 +33,11 @@
             android:layout_height="wrap_content"
             android:text="@string/weather_data" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvWeatherStates"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
     </LinearLayout>
 </FrameLayout>
