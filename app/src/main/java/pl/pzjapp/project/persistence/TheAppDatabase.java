@@ -10,4 +10,5 @@ import pl.pzjapp.project.persistence.model.City;
 public abstract class TheAppDatabase extends RoomDatabase {
 
     public abstract DaoAccess daoAccess();
+
 }
