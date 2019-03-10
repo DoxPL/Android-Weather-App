@@ -17,4 +17,9 @@
     <string name="share">share</string>
     <string name="widok_2">view 2</string>
     <string name="widok_1">view 1</string>
+
+    <string name="item_temperature">Temperature: </string>
+    <string name="item_wind_speed">Wind speed: </string>
+    <string name="item_humidity">Humidity: </string>
+    <string name="item_pressure">Pressure: </string>
 </resources>
