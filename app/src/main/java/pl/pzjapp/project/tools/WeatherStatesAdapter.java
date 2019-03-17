@@ -21,6 +21,11 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
     private List<WeatherDataModel> list;
     private static final String ICONURLDIRECTORY = UtilsForApp.fromTestConfigFile().get("api.iconurl");
 
+    /**
+    * WeatherStatesAdapter constructor
+    * @param context context of class, where adapter is created
+    * @param list ArrayList of data objects that will be used to fill each list element
+    */
     public WeatherStatesAdapter(Context context, List<WeatherDataModel> list)
     {
         this.context = context;
@@ -28,6 +33,9 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
     }
 
 
+    /**
+    * @return WeatherStatesHolder from View
+    */
     @NonNull
     @Override
     public WeatherStatesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -37,6 +45,9 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
         return holder;
     }
 
+    /**
+    * Called by RecyclerView to update view at specified position
+    */
     @Override
     public void onBindViewHolder(@NonNull WeatherStatesHolder weatherStatesHolder, int i) {
         WeatherDataModel currentWeatherState = list.get(i);
@@ -59,11 +70,21 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
         });
     }
 
+    /**
+    * @return size of WeatherDataModel list
+    */
     @Override
     public int getItemCount() {
         return list.size();
     }
 
+    /**
+    * Loads a weather state icon from URL into ImageView
+    * @param iconRef
+    *   Picture name obtained from JSON document
+    * @param currentImageView
+    *   Reference to ImageView of item layout
+    */
     private void loadIcon(String iconRef, ImageView currentImageView)
     {
         Picasso.get().load(ICONURLDIRECTORY + iconRef + ".png").

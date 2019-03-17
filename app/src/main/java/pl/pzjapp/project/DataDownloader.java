@@ -22,12 +22,27 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
     private UtilsForApp utils = new UtilsForApp();
     public AsyncResultListener asyncResultListener;
 
+    /**
+    * Public constructor that accepts following parameters:
+    * @param cityId
+    *   ID of current city
+    * @param limit
+    *   Number of results to fetch from JSON document
+    * @param asyncResultListener
+    *   An interface with fillView method, that must be implemented in MainFragment
+    */
     public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener) {
         this.cityId = cityId;
         this.asyncResultListener = asyncResultListener;
         this.limit = limit;
     }
 
+    /**
+    * This async method opens an HttpURLConnection with OpenWeatherMap API, reads JSON document
+    * and calls parseJSON function from utils to assign data to ArrayList
+    * @return null
+    */
+    @Override
     protected Void doInBackground(Void... params) {
         data = new ArrayList<>();
         URL url;
@@ -49,6 +64,9 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+    /**
+    * Called after doInBackground method is executed
+    */
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
