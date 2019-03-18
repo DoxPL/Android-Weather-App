@@ -22,25 +22,38 @@ public class TheAppDatabaseTest {
     private TheAppDatabase mDatabase;
     private DaoAccess notesDao;
 
-    @Before
-    public void initDb() throws Exception {
-        mDatabase = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(),
-                TheAppDatabase.class)
-                .build();
-        Log.d("TEST", mDatabase.toString());
-        notesDao = mDatabase.daoAccess();
+//    @Before
+//    public void initDb() throws Exception {
+//        TheAppDatabase.getAppDatabase(ApplicationProvider.getApplicationContext());
+//        Log.d("TEST", mDatabase.toString());
+//        notesDao = mDatabase.daoAccess();
+//    }
+//
+//    @After
+//    public void closeDb() throws Exception {
+//        mDatabase.close();
+//    }
+//
+//    @Test
+//    public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
+//        List<City> noteList = LiveDataTestUtil.getValue(notesDao.getAllCities());
+//        assertTrue(noteList.isEmpty());
+//    }
+
+    private static City addCity(final TheAppDatabase db, City city) {
+        db.daoAccess().insertCity(city);
+        return city;
     }
 
-    @After
-    public void closeDb() throws Exception {
-        mDatabase.close();
+    private static void populateWithTestData(TheAppDatabase db) {
+        City user = new City();
+        user.setCityName("Ajay");
+        user.setCountry("Saini");
+        user.setId(25);
+        addCity(db, user);
     }
 
-    @Test
-    public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
-        List<City> noteList = LiveDataTestUtil.getValue(notesDao.getAllCities());
-        assertTrue(noteList.isEmpty());
-    }
+
 
 //    @Test
 //    public void onInsertingNotes_checkIf_RowCountIsCorrect() throws InterruptedException {
@@ -53,7 +66,7 @@ public class TheAppDatabaseTest {
 //
 //    @Test
 //    public void onUpdatingANote_checkIf_UpdateHappensCorrectly() throws InterruptedException {
-//        Note note = FakeNotesSource.fetchFakeNote();
+//        Note note = FakeNotesSource.fetchFakeNote()
 //        notesDao.insert(note);
 //        note.setNoteTitle(FakeNotesSource.FAKE_NOTE_UPDATED_TITLE);
 //        notesDao.update(note);
