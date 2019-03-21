@@ -30,4 +30,7 @@ public interface DaoAccess {
 
     @Query("SELECT * FROM city")
     LiveData<List<City>> getAllCities();
+
+    @Query("SELECT * FROM city WHERE id IN(:cityId)")
+    City getCityById(int cityId);
 }

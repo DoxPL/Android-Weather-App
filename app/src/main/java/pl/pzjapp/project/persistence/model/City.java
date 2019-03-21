@@ -6,10 +6,10 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(tableName = "city")
 public class City implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "city_name")
     private String cityName;
@@ -17,7 +17,7 @@ public class City implements Serializable {
     private String country;
     @ColumnInfo(name = "date")
     private String date;
-    @ColumnInfo(name = "icon_red")
+    @ColumnInfo(name = "icon_ref")
     private String iconRef;
     @ColumnInfo(name = "city_id")
     private int cityId;
@@ -33,6 +33,7 @@ public class City implements Serializable {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }

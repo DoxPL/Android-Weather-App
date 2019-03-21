@@ -1,58 +1,62 @@
 package pl.pzjapp.project.persistence;
 
-import android.arch.persistence.room.Room;
 import android.util.Log;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
 import androidx.test.core.app.ApplicationProvider;
 import pl.pzjapp.project.persistence.dao.DaoAccess;
 import pl.pzjapp.project.persistence.model.City;
+import pl.pzjapp.project.persistence.repository.CityRepository;
 import pl.pzjapp.project.util.LiveDataTestUtil;
 
 import static org.junit.Assert.assertTrue;
 
+@RunWith(RobolectricTestRunner.class)
 public class TheAppDatabaseTest {
 
 
     private TheAppDatabase mDatabase;
     private DaoAccess notesDao;
+    private CityRepository cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
 
-//    @Before
-//    public void initDb() throws Exception {
-//        TheAppDatabase.getAppDatabase(ApplicationProvider.getApplicationContext());
-//        Log.d("TEST", mDatabase.toString());
-//        notesDao = mDatabase.daoAccess();
-//    }
-//
-//    @After
-//    public void closeDb() throws Exception {
-//        mDatabase.close();
-//    }
-//
-//    @Test
-//    public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
-//        List<City> noteList = LiveDataTestUtil.getValue(notesDao.getAllCities());
-//        assertTrue(noteList.isEmpty());
-//    }
+    @Before
+    public void initDb() throws Exception {
+//        mDatabase = TheAppDatabase.getAppDatabase(ApplicationProvider.getApplicationContext());
+        populateWithTestData();
+        Log.d("TEST", mDatabase.toString());
+        notesDao = mDatabase.daoAccess();
+    }
 
-    private static City addCity(final TheAppDatabase db, City city) {
-        db.daoAccess().insertCity(city);
+    @After
+    public void closeDb() throws Exception {
+        mDatabase.close();
+    }
+
+    @Test
+    public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
+        List<City> noteList = LiveDataTestUtil.getValue(notesDao.getAllCities());
+        assertTrue(noteList.isEmpty());
+    }
+
+    private City addCity(City city) {
+        cityRepository.insertCity(city);
         return city;
     }
 
-    private static void populateWithTestData(TheAppDatabase db) {
-        City user = new City();
-        user.setCityName("Ajay");
-        user.setCountry("Saini");
-        user.setId(25);
-        addCity(db, user);
+    private void populateWithTestData() {
+        City city = new City();
+        city.setCityName("Ajay");
+        city.setCountry("Saini");
+        city.setId(25);
+        addCity(city);
     }
-
 
 
 //    @Test
