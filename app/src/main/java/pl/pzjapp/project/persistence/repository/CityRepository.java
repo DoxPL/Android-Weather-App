@@ -1,7 +1,6 @@
 package pl.pzjapp.project.persistence.repository;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,18 +21,6 @@ public class CityRepository {
     public CityRepository(@NonNull Context context) {
         theAppDatabase = Room.databaseBuilder(context, theAppDatabase.getClass(), DB_NAME).build();
     }
-
-//
-//    public void insertCity(String cityName, String country, int id) {
-//
-//        City dbCity = new City.CityBuilder()
-//                .setCityName(cityName)
-//                .setCityId(id)
-//                .setCountry(country)
-//                .build();
-//
-//        insertCity(dbCity);
-//    }
 
     @SuppressLint("StaticFieldLeak")
     public void insertCity(final City city) {
@@ -59,9 +46,9 @@ public class CityRepository {
 
     @SuppressLint("StaticFieldLeak")
     public void getAllCities() {
-        new AsyncTask<Void, Void, LiveData<List<City>>>() {
+        new AsyncTask<Void, Void, List<City>>() {
             @Override
-            protected LiveData<List<City>> doInBackground(Void... voids) {
+            protected List<City> doInBackground(Void... voids) {
                 return theAppDatabase.daoAccess().getAllCities();
             }
         }.execute();

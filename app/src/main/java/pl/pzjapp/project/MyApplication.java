@@ -1,18 +1,54 @@
 package pl.pzjapp.project;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.util.Log;
+
+import java.util.List;
+
+import pl.pzjapp.project.persistence.TheAppDatabase;
+import pl.pzjapp.project.persistence.model.City;
+import pl.pzjapp.project.persistence.repository.CityRepository;
 
 public class MyApplication extends Application {
-
-    private static Context context;
+    private static final String DATABASE_NAME = "the-app";
 
     public void onCreate() {
         super.onCreate();
-        MyApplication.context = getApplicationContext();
+        Context applicationContext = getApplicationContext();
+        CityRepository cityRepository = new CityRepository(applicationContext);
+        cityRepository.insertCity(populateDataBase());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                populateDataBase();
+            }
+        }).start();
+        cityRepository.getAllCities();
+        cityRepository.getCityById(0);
+
+
     }
 
-    public static Context getAppContext() {
-        return MyApplication.context;
+    private City populateDataBase() {
+        City city = new City();
+//        city.setId(4);
+        city.setCityName("dupa");
+        city.setCountry("Poland");
+        city.setDate("123");
+        city.setWindSpeed(42);
+        city.setIconRef("123");
+        city.setCityId(123);
+        city.setPressure(123);
+        city.setHumidity(312);
+        city.setTemperature(2);
+        return city;
     }
+
+    private List<City> getAllCities(TheAppDatabase theAppDatabase) {
+        return theAppDatabase.daoAccess().getAllCities();
+    }
+
 }

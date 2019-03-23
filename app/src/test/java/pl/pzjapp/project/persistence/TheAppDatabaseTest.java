@@ -1,5 +1,6 @@
 package pl.pzjapp.project.persistence;
 
+import android.arch.persistence.room.Room;
 import android.util.Log;
 
 import org.junit.After;
@@ -8,30 +9,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.List;
-
 import androidx.test.core.app.ApplicationProvider;
-import pl.pzjapp.project.persistence.dao.DaoAccess;
 import pl.pzjapp.project.persistence.model.City;
 import pl.pzjapp.project.persistence.repository.CityRepository;
-import pl.pzjapp.project.util.LiveDataTestUtil;
-
-import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 public class TheAppDatabaseTest {
 
 
     private TheAppDatabase mDatabase;
-    private DaoAccess notesDao;
-    private CityRepository cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
+    private CityRepository cityRepository;
 
     @Before
     public void initDb() throws Exception {
-//        mDatabase = TheAppDatabase.getAppDatabase(ApplicationProvider.getApplicationContext());
+        mDatabase = Room.databaseBuilder(ApplicationProvider.getApplicationContext(), TheAppDatabase.class, "the-app").build();
+        cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
         populateWithTestData();
         Log.d("TEST", mDatabase.toString());
-        notesDao = mDatabase.daoAccess();
     }
 
     @After
@@ -41,8 +35,7 @@ public class TheAppDatabaseTest {
 
     @Test
     public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
-        List<City> noteList = LiveDataTestUtil.getValue(notesDao.getAllCities());
-        assertTrue(noteList.isEmpty());
+        cityRepository.getAllCities();
     }
 
     private City addCity(City city) {
