@@ -110,6 +110,9 @@ public class City implements Serializable {
         this.temperature = temperature;
     }
 
+    public City() {
+    }
+
     public City(String cityName, String country, String date, String iconRef, int cityId, float windSpeed, float pressure, float humidity, float temperature) {
         this.cityName = cityName;
         this.country = country;
@@ -120,10 +123,6 @@ public class City implements Serializable {
         this.pressure = pressure;
         this.humidity = humidity;
         this.temperature = temperature;
-    }
-
-    public City() {
-
     }
 
     public static class CityBuilder {

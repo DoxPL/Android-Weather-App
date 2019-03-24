@@ -43,7 +43,7 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.1"
     implementation "android.arch.lifecycle:livedata:1.1.1"
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
-    testImplementation "org.robolectric:robolectric:4.0.2"
+    testImplementation "org.robolectric:robolectric:4.2"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.6'
