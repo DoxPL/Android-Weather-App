@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
@@ -19,7 +20,7 @@ public class CityRepository {
     private TheAppDatabase theAppDatabase;
 
     public CityRepository(@NonNull Context context) {
-        theAppDatabase = Room.databaseBuilder(context, theAppDatabase.getClass(), DB_NAME).build();
+        theAppDatabase = Room.databaseBuilder(context, TheAppDatabase.class, DB_NAME).allowMainThreadQueries().build();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -45,12 +46,9 @@ public class CityRepository {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public void getAllCities() {
-        new AsyncTask<Void, Void, List<City>>() {
-            @Override
-            protected List<City> doInBackground(Void... voids) {
-                return theAppDatabase.daoAccess().getAllCities();
-            }
-        }.execute();
+    public ArrayList<City> getAllCities() {
+        List<City> cities = new ArrayList<>();
+        cities = theAppDatabase.daoAccess().getAllCities();
+        return (ArrayList<City>) cities;
     }
 }

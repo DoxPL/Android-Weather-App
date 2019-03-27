@@ -26,6 +26,10 @@ public class TheAppDatabaseTest {
         cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
         populateWithTestData();
         Log.d("TEST", mDatabase.toString());
+        for(City c : cityRepository.getAllCities())
+        {
+            System.out.println(c.toString());
+        }
     }
 
     @After
