@@ -19,7 +19,7 @@ public class MyApplication extends Application {
         super.onCreate();
         Context applicationContext = getApplicationContext();
         CityRepository cityRepository = new CityRepository(applicationContext);
-        cityRepository.insertCity(populateDataBase());
+//        cityRepository.insertCity(populateDataBase());
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -34,7 +34,7 @@ public class MyApplication extends Application {
 
     private City populateDataBase() {
         City city = new City();
-//        city.setId(4);
+        city.setId(4);
         city.setCityName("dupa");
         city.setCountry("Poland");
         city.setDate("123");

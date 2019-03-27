@@ -46,9 +46,7 @@ public class CityRepository {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public ArrayList<City> getAllCities() {
-        List<City> cities = new ArrayList<>();
-        cities = theAppDatabase.daoAccess().getAllCities();
-        return (ArrayList<City>) cities;
+    public List<City> getAllCities() {
+        return new ArrayList<>(theAppDatabase.daoAccess().getAllCities());
     }
 }
