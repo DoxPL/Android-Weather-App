@@ -43,8 +43,8 @@ public class OtherFragment extends Fragment {
 
         TextView tvCities = view.findViewById(R.id.cities);
         CityRepository cityRepository = new CityRepository(getContext());
-//        cityRepository.insertCity(new City("Uniejow", "Poland", "26.03.2019", "exmp", 1, 3.1f, 2.6f, 2.7f, 17f));
-//        cityRepository.insertCity(new City("Lodz", "Poland", "27.03.2019", "exmp", 2, 3.1f, 2.6f, 2.7f, 17f));
+        cityRepository.insertCity(new City("Uniejow", "Poland", "26.03.2019", "exmp", 1, 3.1f, 2.6f, 2.7f, 17f));
+        cityRepository.insertCity(new City("Lodz", "Poland", "27.03.2019", "exmp", 2, 3.1f, 2.6f, 2.7f, 17f));
         tvCities.setText("");
 
         for (City c : cityRepository.getAllCities()) {

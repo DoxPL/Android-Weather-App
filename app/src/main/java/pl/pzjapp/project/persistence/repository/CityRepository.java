@@ -25,7 +25,10 @@ public class CityRepository {
     private TheAppDatabase theAppDatabase;
 
     public CityRepository(@NonNull Context context) {
-        theAppDatabase = Room.databaseBuilder(context, TheAppDatabase.class, DB_NAME).allowMainThreadQueries().build();
+        theAppDatabase = Room.databaseBuilder(context, TheAppDatabase.class, DB_NAME)
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
     }
 
     @SuppressLint("StaticFieldLeak")
