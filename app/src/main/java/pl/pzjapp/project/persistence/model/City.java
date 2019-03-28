@@ -221,4 +221,19 @@ public class City implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                ", country='" + country + '\'' +
+                ", date='" + date + '\'' +
+                ", iconRef='" + iconRef + '\'' +
+                ", cityId=" + cityId +
+                ", windSpeed=" + windSpeed +
+                ", pressure=" + pressure +
+                ", humidity=" + humidity +
+                ", temperature=" + temperature +
+                '}';
+    }
 }

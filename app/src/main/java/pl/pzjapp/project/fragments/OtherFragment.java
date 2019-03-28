@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import pl.pzjapp.project.R;
+import pl.pzjapp.project.persistence.model.City;
+import pl.pzjapp.project.persistence.repository.CityRepository;
 
 public class OtherFragment extends Fragment {
 
@@ -48,7 +51,16 @@ public class OtherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
 
-        //
+        TextView tvCities = view.findViewById(R.id.cities);
+        CityRepository cityRepository = new CityRepository(getContext());
+//        cityRepository.insertCity(new City("Uniejow", "Poland", "26.03.2019", "exmp", 1, 3.1f, 2.6f, 2.7f, 17f));
+//        cityRepository.insertCity(new City("Lodz", "Poland", "27.03.2019", "exmp", 2, 3.1f, 2.6f, 2.7f, 17f));
+        tvCities.setText("");
+
+        for(City c : cityRepository.getAllCities())
+        {
+            tvCities.append(c.getCityName() + " : " + c.getCountry() + "\n\n");
+        }
 
         return view;
     }

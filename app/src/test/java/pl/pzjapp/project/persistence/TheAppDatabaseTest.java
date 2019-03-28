@@ -17,14 +17,25 @@ import pl.pzjapp.project.persistence.repository.CityRepository;
 public class TheAppDatabaseTest {
 
 
+    private TheAppDatabase mDatabase;
     private CityRepository cityRepository;
 
     @Before
     public void initDb() throws Exception {
-        cityRepository = new CityRepository();
+        mDatabase = Room.databaseBuilder(ApplicationProvider.getApplicationContext(), TheAppDatabase.class, "the-app").build();
+        cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
         populateWithTestData();
+        Log.d("TEST", mDatabase.toString());
+        for(City c : cityRepository.getAllCities())
+        {
+            System.out.println(c.toString());
+        }
     }
 
+    @After
+    public void closeDb() throws Exception {
+        mDatabase.close();
+    }
 
     @Test
     public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
