@@ -24,7 +24,7 @@ public class MyApplication extends Application {
             }
         }).start();
         cityRepository.getAllCities();
-        cityRepository.getCityById("0");
+        cityRepository.getCityById(0);
 
 
     }
@@ -44,7 +44,7 @@ public class MyApplication extends Application {
     }
 
     private List<City> getAllCities(TheAppDatabase theAppDatabase) {
-        return theAppDatabase.daoAccess().getAllCities();
+        return theAppDatabase.getCityDao().getAllCities();
     }
 
 }

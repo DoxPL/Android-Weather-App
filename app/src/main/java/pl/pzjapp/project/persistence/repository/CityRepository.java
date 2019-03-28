@@ -1,3 +1,7 @@
+/*
+ * Developed by Adam Yunad
+ */
+
 package pl.pzjapp.project.persistence.repository;
 
 import android.annotation.SuppressLint;
@@ -29,18 +33,18 @@ public class CityRepository {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                theAppDatabase.daoAccess().insertCity(city);
+                theAppDatabase.getCityDao().insert(city);
                 return null;
             }
         }.execute();
     }
 
     @SuppressLint("StaticFieldLeak")
-    public void getCityById(final String index) {
+    public void getCityById(final int index) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                theAppDatabase.daoAccess().getCityById("index");
+                theAppDatabase.getCityDao().getCityById(index);
                 return null;
             }
         }.execute();
@@ -48,6 +52,6 @@ public class CityRepository {
 
     @SuppressLint("StaticFieldLeak")
     public List<City> getAllCities() {
-        return theAppDatabase.daoAccess().getAllCities();
+        return theAppDatabase.getCityDao().getAllCities();
     }
 }

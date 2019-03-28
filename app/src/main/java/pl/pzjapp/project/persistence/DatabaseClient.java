@@ -1,3 +1,7 @@
+/*
+ * Developed by Adam Yunad
+ */
+
 package pl.pzjapp.project.persistence;
 
 import android.arch.persistence.room.Room;
