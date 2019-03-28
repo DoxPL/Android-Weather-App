@@ -1,13 +1,17 @@
 package pl.pzjapp.project.fragments;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import pl.pzjapp.project.R;
 import pl.pzjapp.project.persistence.model.City;
@@ -47,18 +51,17 @@ public class OtherFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
 
         TextView tvCities = view.findViewById(R.id.cities);
         CityRepository cityRepository = new CityRepository(getContext());
-//        cityRepository.insertCity(new City("Uniejow", "Poland", "26.03.2019", "exmp", 1, 3.1f, 2.6f, 2.7f, 17f));
-//        cityRepository.insertCity(new City("Lodz", "Poland", "27.03.2019", "exmp", 2, 3.1f, 2.6f, 2.7f, 17f));
+        cityRepository.insertCity(new City("Uniejow", "Poland", "26.03.2019", "exmp", 1, 3.1f, 2.6f, 2.7f, 17f));
+        cityRepository.insertCity(new City("Lodz", "Poland", "27.03.2019", "exmp", 2, 3.1f, 2.6f, 2.7f, 17f));
         tvCities.setText("");
 
-        for(City c : cityRepository.getAllCities())
-        {
+        for (City c: cityRepository.getAllCities()) {
             tvCities.append(c.getCityName() + " : " + c.getCountry() + "\n\n");
         }
 

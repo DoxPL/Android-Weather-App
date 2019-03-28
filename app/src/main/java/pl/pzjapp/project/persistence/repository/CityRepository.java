@@ -1,6 +1,7 @@
 package pl.pzjapp.project.persistence.repository;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -35,11 +36,11 @@ public class CityRepository {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public void getCityById(final int index) {
+    public void getCityById(final String index) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                theAppDatabase.daoAccess().getCityById(index);
+                theAppDatabase.daoAccess().getCityById("index");
                 return null;
             }
         }.execute();
@@ -47,6 +48,6 @@ public class CityRepository {
 
     @SuppressLint("StaticFieldLeak")
     public List<City> getAllCities() {
-        return new ArrayList<>(theAppDatabase.daoAccess().getAllCities());
+        return theAppDatabase.daoAccess().getAllCities();
     }
 }

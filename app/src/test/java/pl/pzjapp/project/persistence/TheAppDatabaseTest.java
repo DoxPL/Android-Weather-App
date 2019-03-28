@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Objects;
+
 import androidx.test.core.app.ApplicationProvider;
 import pl.pzjapp.project.persistence.model.City;
 import pl.pzjapp.project.persistence.repository.CityRepository;
@@ -25,9 +27,7 @@ public class TheAppDatabaseTest {
         mDatabase = Room.databaseBuilder(ApplicationProvider.getApplicationContext(), TheAppDatabase.class, "the-app").build();
         cityRepository = new CityRepository(ApplicationProvider.getApplicationContext());
         populateWithTestData();
-        Log.d("TEST", mDatabase.toString());
-        for(City c : cityRepository.getAllCities())
-        {
+        for (City c : cityRepository.getAllCities()) {
             System.out.println(c.toString());
         }
     }
@@ -39,6 +39,7 @@ public class TheAppDatabaseTest {
 
     @Test
     public void onFetchingNotes_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
+        System.out.println(cityRepository.getAllCities());
         cityRepository.getAllCities();
     }
 
@@ -56,33 +57,4 @@ public class TheAppDatabaseTest {
     }
 
 
-//    @Test
-//    public void onInsertingNotes_checkIf_RowCountIsCorrect() throws InterruptedException {
-//        List<Note> noteList = FakeNotesSource.getFakeNotes(5);
-//        noteList.forEach(note -> {
-//            notesDao.insert(note);
-//        });
-//        assertEquals(5, LiveDataTestUtil.getValue(notesDao.getAllNotes()).size());
-//    }
-//
-//    @Test
-//    public void onUpdatingANote_checkIf_UpdateHappensCorrectly() throws InterruptedException {
-//        Note note = FakeNotesSource.fetchFakeNote()
-//        notesDao.insert(note);
-//        note.setNoteTitle(FakeNotesSource.FAKE_NOTE_UPDATED_TITLE);
-//        notesDao.update(note);
-//        assertEquals(1, LiveDataTestUtil.getValue(notesDao.getAllNotes()).size());
-//        assertEquals(FakeNotesSource.FAKE_NOTE_UPDATED_TITLE,
-//                LiveDataTestUtil.getValue(notesDao.getNoteById(note.getId())).getNoteTitle());
-//    }
-//
-//    @Test
-//    public void onNoteDeletion_CheckIf_NoteIsDeletedFromTable() throws InterruptedException {
-//        List<Note> noteList = FakeNotesSource.getFakeNotes(5);
-//        noteList.forEach(note -> {
-//            notesDao.insert(note);
-//        });
-//        notesDao.deleteNote(noteList.get(2));
-//        assertNull(LiveDataTestUtil.getValue(notesDao.getNoteById(noteList.get(2).getId())));
-//    }
 }

@@ -1,10 +1,7 @@
 package pl.pzjapp.project;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.List;
 
@@ -27,14 +24,13 @@ public class MyApplication extends Application {
             }
         }).start();
         cityRepository.getAllCities();
-        cityRepository.getCityById(0);
+        cityRepository.getCityById("0");
 
 
     }
 
     private City populateDataBase() {
         City city = new City();
-        city.setId(4);
         city.setCityName("dupa");
         city.setCountry("Poland");
         city.setDate("123");
