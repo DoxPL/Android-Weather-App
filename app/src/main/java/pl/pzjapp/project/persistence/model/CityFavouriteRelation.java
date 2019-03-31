@@ -7,6 +7,8 @@ package pl.pzjapp.project.persistence.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "city_favourite_join",
         primaryKeys = {"cityId", "favouriteId"},
         foreignKeys = {
@@ -27,4 +29,17 @@ public class CityFavouriteRelation {
         this.favouriteId = favouriteId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CityFavouriteRelation that = (CityFavouriteRelation) o;
+        return cityId == that.cityId &&
+                favouriteId == that.favouriteId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cityId, favouriteId);
+    }
 }
