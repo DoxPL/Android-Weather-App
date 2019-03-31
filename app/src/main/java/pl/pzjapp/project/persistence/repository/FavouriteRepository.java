@@ -1,6 +1,4 @@
-/*
- * Developed by Adam Yunad
- */
+
 
 /*
  * Developed by Adam Yunad

@@ -33,13 +33,7 @@ public class CityRepository {
 
     @SuppressLint("StaticFieldLeak")
     public void insertCity(final City city) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                theAppDatabase.getCityDao().insert(city);
-                return null;
-            }
-        }.execute();
+        theAppDatabase.getCityDao().insert(city);
     }
 
     @SuppressLint("StaticFieldLeak")
