@@ -56,10 +56,14 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
         float pressure = currentWeatherState.getPressure();
         String icon = currentWeatherState.getIconRef();
         weatherStatesHolder.tvCityName.setText(currentWeatherState.getCityData().getCityName());
-        weatherStatesHolder.tvDescription.setText(currentWeatherState.getWeatherState());
-        weatherStatesHolder.tvTemperature.setText(context.getResources().getString(R.string.item_temperature) + temperature);
-        weatherStatesHolder.tvWindSpeed.setText(context.getResources().getString(R.string.item_wind_speed) + windSpeed);
-        weatherStatesHolder.tvPressure.setText(context.getResources().getString(R.string.item_pressure) + pressure);
+        weatherStatesHolder.tvDescription.setText(context.getString(R.string.state) +
+                currentWeatherState.getWeatherState());
+        weatherStatesHolder.tvTemperature.setText(context.getResources().getString(R.string.item_temperature) + temperature +
+                context.getString(R.string.unit_celsius_degree));
+        weatherStatesHolder.tvWindSpeed.setText(context.getResources().getString(R.string.item_wind_speed) + windSpeed +
+                context.getString(R.string.unit_kmph));
+        weatherStatesHolder.tvPressure.setText(context.getResources().getString(R.string.item_pressure) + pressure +
+                context.getString(R.string.unit_hpa));
         weatherStatesHolder.tvDate.setText(currentWeatherState.getDate());
         loadIcon(icon, weatherStatesHolder.ivIcon);
         weatherStatesHolder.setOnItemClickListener(new ItemClickListener() {

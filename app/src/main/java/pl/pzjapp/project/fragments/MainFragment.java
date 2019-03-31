@@ -51,7 +51,7 @@ public class MainFragment extends Fragment implements AsyncResultListener {
         rvWeatherStates.setHasFixedSize(true);
         rvWeatherStates.setLayoutManager(new LinearLayoutManager(getContext()));
         rvWeatherStates.setAdapter(adapter);
-        DataDownloader downloaderTask = new DataDownloader(524901, 5,
+        DataDownloader downloaderTask = new DataDownloader(1851632, 5,
                 MainFragment.this);
         downloaderTask.execute();
         return view;

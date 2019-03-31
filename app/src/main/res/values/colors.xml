@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorListItem">#B8BED1</color>
+    <color name="colorItemTitle">#3B1687</color>
+    <color name="colorItemText">#2A68A6</color>
+    <color name="colorCardView">#DDE4EB</color>
 </resources>
