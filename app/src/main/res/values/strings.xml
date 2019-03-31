@@ -27,4 +27,6 @@
     <string name="unit_celsius_degree">°C</string>
     <string name="unit_kmph">km/h</string>
     <string name="unit_hpa">hPa</string>
+
+    <string name="display_spinner">Display spinner</string>
 </resources>

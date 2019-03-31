@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import pl.pzjapp.project.tools.WeatherStatesAdapter;
 public class MainFragment extends Fragment implements AsyncResultListener {
     private RecyclerView rvWeatherStates;
     private ProgressBar progressBar;
+    private Spinner spCities;
     private WeatherStatesAdapter adapter;
     private ArrayList<WeatherDataModel> listItems;
     private OnFragmentInteractionListener mListener;
@@ -46,6 +48,7 @@ public class MainFragment extends Fragment implements AsyncResultListener {
         //TODO Create RecyclerView with items that represents weather data
         rvWeatherStates = view.findViewById(R.id.rvWeatherStates);
         progressBar = view.findViewById(R.id.progressBar);
+        spCities = view.findViewById(R.id.spCities);
         listItems = new ArrayList<WeatherDataModel>();
         adapter = new WeatherStatesAdapter(getContext(), listItems);
         rvWeatherStates.setHasFixedSize(true);
