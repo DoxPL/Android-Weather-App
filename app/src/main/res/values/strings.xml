@@ -29,4 +29,8 @@
     <string name="unit_hpa">hPa</string>
 
     <string name="display_spinner">Display spinner</string>
+
+    <string name="dialog_remove_text">Are you sure to delete this position?</string>
+    <string name="dialog_btn_yes">Yes</string>
+    <string name="dialog_btn_cancel">Cancel</string>
 </resources>

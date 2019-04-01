@@ -1,6 +1,8 @@
 package pl.pzjapp.project.tools;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,8 +70,29 @@ public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHold
         loadIcon(icon, weatherStatesHolder.ivIcon);
         weatherStatesHolder.setOnItemClickListener(new ItemClickListener() {
             @Override
-            public void onItemClick(View view, int position, boolean longClick) {
-
+            public void onItemClick(View view, final int position, boolean longClick) {
+                if(longClick)
+                {
+                    DialogInterface.OnClickListener dialogClickCallback = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which)
+                            {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    list.remove(position);
+                                    notifyDataSetChanged();
+                                    //Todo: Remove record from database
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
+                            }
+                        }
+                    };
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                    dialogBuilder.setMessage(context.getResources().getString(R.string.dialog_remove_text))
+                            .setPositiveButton(context.getResources().getString(R.string.dialog_btn_yes), dialogClickCallback)
+                            .setNegativeButton(context.getResources().getString(R.string.dialog_btn_cancel), dialogClickCallback).show();
+                }
             }
         });
     }

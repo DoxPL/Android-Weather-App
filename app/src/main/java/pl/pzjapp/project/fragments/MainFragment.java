@@ -1,26 +1,33 @@
 package pl.pzjapp.project.fragments;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Switch;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
 import pl.pzjapp.project.AsyncResultListener;
 import pl.pzjapp.project.DataDownloader;
-import pl.pzjapp.project.model.CityDataModel;
 import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.R;
 import pl.pzjapp.project.tools.WeatherStatesAdapter;
@@ -30,8 +37,9 @@ public class MainFragment extends Fragment implements AsyncResultListener {
     private ProgressBar progressBar;
     private Spinner spCities;
     private WeatherStatesAdapter adapter;
+    private ArrayAdapter<String> spinnerAdapter;
     private ArrayList<WeatherDataModel> listItems;
-    private OnFragmentInteractionListener mListener;
+    private ArrayList<String> spinnerItems;
 
     public MainFragment() {
     }
@@ -45,11 +53,16 @@ public class MainFragment extends Fragment implements AsyncResultListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        //TODO Create RecyclerView with items that represents weather data
+        spCities = view.findViewById(R.id.spCities);
         rvWeatherStates = view.findViewById(R.id.rvWeatherStates);
         progressBar = view.findViewById(R.id.progressBar);
-        spCities = view.findViewById(R.id.spCities);
         listItems = new ArrayList<WeatherDataModel>();
+        spinnerItems = new ArrayList<String>();
+        spinnerItems.add("Example city");
+        spinnerItems.add("Test");
+        spinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spCities.setAdapter(spinnerAdapter);
         adapter = new WeatherStatesAdapter(getContext(), listItems);
         rvWeatherStates.setHasFixedSize(true);
         rvWeatherStates.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -70,26 +83,33 @@ public class MainFragment extends Fragment implements AsyncResultListener {
         progressBar.setVisibility(View.GONE);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem swDisplaySpinner = menu.findItem(R.id.swShowSpinner);
+        swDisplaySpinner.setVisible(true);
+        swDisplaySpinner.setChecked(false);
+        Switch actionBarSwitch = menu.findItem(R.id.swShowSpinner).
+                getActionView().findViewById(R.id.swToolbar);
+        actionBarSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    spCities.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    spCities.setVisibility(View.GONE);
+                }
+            }
+        });
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
 }
