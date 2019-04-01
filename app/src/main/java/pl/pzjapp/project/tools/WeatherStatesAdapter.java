@@ -16,12 +16,12 @@ import java.util.List;
 import pl.pzjapp.project.ItemClickListener;
 import pl.pzjapp.project.R;
 import pl.pzjapp.project.model.WeatherDataModel;
-import pl.pzjapp.project.utils.UtilsForApp;
+import pl.pzjapp.project.utils.AppUtils;
 
 public class WeatherStatesAdapter extends RecyclerView.Adapter<WeatherStatesHolder> {
     private Context context;
     private List<WeatherDataModel> list;
-    private static final String ICONURLDIRECTORY = UtilsForApp.fromTestConfigFile().get("api.iconurl");
+    private static final String ICONURLDIRECTORY = AppUtils.fromTestConfigFile().get("api.iconurl");
 
     /**
     * WeatherStatesAdapter constructor

@@ -3,20 +3,19 @@ package pl.pzjapp.project.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import pl.pzjapp.project.R;
+import pl.pzjapp.project.persistence.model.City;
+import pl.pzjapp.project.persistence.repository.CityRepository;
 
 public class OtherFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -28,8 +27,6 @@ public class OtherFragment extends Fragment {
     public static OtherFragment newInstance(String param1, String param2) {
         OtherFragment fragment = new OtherFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,18 +34,20 @@ public class OtherFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
 
-        //
+        TextView tvCities = view.findViewById(R.id.cities);
+        CityRepository cityRepository = new CityRepository(getContext());
+        tvCities.setText("");
+
+        for (City city : cityRepository.getAllCities()) {
+            tvCities.append(city.getId() + " " + city.getCityName() + "" + city.getCountry() + "\n\n");
+        }
 
         return view;
     }
