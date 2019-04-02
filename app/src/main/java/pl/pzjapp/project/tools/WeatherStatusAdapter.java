@@ -19,7 +19,7 @@ import pl.pzjapp.project.R;
 import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.utils.AppUtils;
 
-public class WeatherStatusAdapter extends RecyclerView.Adapter<WeatherStatesHolder> {
+public class WeatherStatusAdapter extends RecyclerView.Adapter<WeatherStatusHolder> {
     private Context context;
     private List<WeatherDataModel> list;
     private static final String ICON_URL_DIRECTORY = AppUtils.fromTestConfigFile().get("api.iconurl");
@@ -39,14 +39,14 @@ public class WeatherStatusAdapter extends RecyclerView.Adapter<WeatherStatesHold
     /**
      * @param viewGroup The ViewGroup into which the new View will be added after it is bound to an adapter position (Android docs)
      * @param i         The view type of the new View (Android docs)
-     * @return WeatherStatesHolder from View
+     * @return WeatherStatusHolder from View
      */
     @NonNull
     @Override
-    public WeatherStatesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public WeatherStatusHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.weather_state_item, null);
-        WeatherStatesHolder holder = new WeatherStatesHolder(view);
+        WeatherStatusHolder holder = new WeatherStatusHolder(view);
         return holder;
     }
 
@@ -54,7 +54,7 @@ public class WeatherStatusAdapter extends RecyclerView.Adapter<WeatherStatesHold
      * Called by RecyclerView to update view at specified position
      */
     @Override
-    public void onBindViewHolder(@NonNull WeatherStatesHolder weatherStatesHolder, int i) {
+    public void onBindViewHolder(@NonNull WeatherStatusHolder weatherStatesHolder, int i) {
         initComponents(weatherStatesHolder, list.get(i));
         weatherStatesHolder.setOnItemClickListener(new ItemClickListener() {
             @Override
@@ -71,7 +71,7 @@ public class WeatherStatusAdapter extends RecyclerView.Adapter<WeatherStatesHold
      * @param weatherStatesHolder Holder of current list item
      * @param currentWeatherState Object with weather data
      */
-    private void initComponents(WeatherStatesHolder weatherStatesHolder, WeatherDataModel currentWeatherState) {
+    private void initComponents(WeatherStatusHolder weatherStatesHolder, WeatherDataModel currentWeatherState) {
         float temperature = currentWeatherState.getTemp();
         float windSpeed = currentWeatherState.getWindSpeed();
         float pressure = currentWeatherState.getPressure();

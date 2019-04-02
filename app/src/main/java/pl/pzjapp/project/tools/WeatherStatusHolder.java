@@ -9,7 +9,7 @@ import android.widget.TextView;
 import pl.pzjapp.project.ItemClickListener;
 import pl.pzjapp.project.R;
 
-public class WeatherStatesHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+public class WeatherStatusHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
     private ItemClickListener listener;
     protected TextView tvCityName;
     protected TextView tvDescription;
@@ -24,7 +24,7 @@ public class WeatherStatesHolder extends RecyclerView.ViewHolder implements View
      *
      * @param itemView current item view
      */
-    public WeatherStatesHolder(@NonNull View itemView) {
+    public WeatherStatusHolder(@NonNull View itemView) {
         super(itemView);
         this.tvCityName = itemView.findViewById(R.id.tvCityName);
         this.tvDescription = itemView.findViewById(R.id.tvDescription);
