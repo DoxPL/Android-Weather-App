@@ -1,28 +1,21 @@
 package pl.pzjapp.project.fragments;
 
-import android.app.ActionBar;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -30,13 +23,13 @@ import pl.pzjapp.project.AsyncResultListener;
 import pl.pzjapp.project.DataDownloader;
 import pl.pzjapp.project.model.WeatherDataModel;
 import pl.pzjapp.project.R;
-import pl.pzjapp.project.tools.WeatherStatesAdapter;
+import pl.pzjapp.project.tools.WeatherStatusAdapter;
 
 public class MainFragment extends Fragment implements AsyncResultListener {
     private RecyclerView rvWeatherStates;
     private ProgressBar progressBar;
     private Spinner spCities;
-    private WeatherStatesAdapter adapter;
+    private WeatherStatusAdapter adapter;
     private ArrayAdapter<String> spinnerAdapter;
     private ArrayList<WeatherDataModel> listItems;
     private ArrayList<String> spinnerItems;
@@ -63,7 +56,7 @@ public class MainFragment extends Fragment implements AsyncResultListener {
         spinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spCities.setAdapter(spinnerAdapter);
-        adapter = new WeatherStatesAdapter(getContext(), listItems);
+        adapter = new WeatherStatusAdapter(getContext(), listItems);
         rvWeatherStates.setHasFixedSize(true);
         rvWeatherStates.setLayoutManager(new LinearLayoutManager(getContext()));
         rvWeatherStates.setAdapter(adapter);

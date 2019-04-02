@@ -20,9 +20,10 @@ public class WeatherStatesHolder extends RecyclerView.ViewHolder implements View
     protected ImageView ivIcon;
 
     /**
-    * Public constructor. Makes an intercations with layout's widgets to JAVA objects.
-    * @param itemView current item view
-    */
+     * Public constructor. Makes an intercations with layout's widgets to JAVA objects.
+     *
+     * @param itemView current item view
+     */
     public WeatherStatesHolder(@NonNull View itemView) {
         super(itemView);
         this.tvCityName = itemView.findViewById(R.id.tvCityName);
@@ -35,28 +36,31 @@ public class WeatherStatesHolder extends RecyclerView.ViewHolder implements View
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
     }
+
     /**
-    * Assigns ItemClickListener
-    * @param listener listener's interface to implement
-    */
-    public void setOnItemClickListener(ItemClickListener listener)
-    {
+     * Assigns ItemClickListener
+     *
+     * @param listener listener's interface to implement
+     */
+    public void setOnItemClickListener(ItemClickListener listener) {
         this.listener = listener;
     }
 
     /**
-    * Method called after click of list element
-    * @param v view of clicked element
-    */
+     * Method called after click of list element
+     *
+     * @param v view of clicked element
+     */
     @Override
     public void onClick(View v) {
         listener.onItemClick(v, getAdapterPosition(), false);
     }
 
     /**
-    * Method called after long click of list element
-    * @param v view of long-clicked element
-    */
+     * Method called after long click of list element
+     *
+     * @param v view of long-clicked element
+     */
     @Override
     public boolean onLongClick(View v) {
         listener.onItemClick(v, getAdapterPosition(), true);

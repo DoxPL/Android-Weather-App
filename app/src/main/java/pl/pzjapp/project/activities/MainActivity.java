@@ -22,7 +22,6 @@ import pl.pzjapp.project.fragments.OtherFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Switch swShowSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         View v = menu.findItem(R.id.swShowSpinner).getActionView();
-        //swShowSpinner = (Switch) v.findViewById(R.id.swShowSpinner);
         return true;
     }
 
@@ -89,15 +87,12 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Fragment currentFragment = null;
-        switch(id)
-        {
+        switch (id) {
             case R.id.nav_main_view:
                 currentFragment = new MainFragment();
-                //swShowSpinner.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_other_view:
                 currentFragment = new OtherFragment();
-                //swShowSpinner.setVisibility(View.GONE);
                 break;
         }
 

@@ -23,14 +23,12 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
     public AsyncResultListener asyncResultListener;
 
     /**
-    * Public constructor that accepts following parameters:
-    * @param cityId
-    *   ID of current city
-    * @param limit
-    *   Number of results to fetch from JSON document
-    * @param asyncResultListener
-    *   An interface with fillView method, that must be implemented in MainFragment
-    */
+     * Public constructor that accepts following parameters:
+     *
+     * @param cityId              ID of current city
+     * @param limit               Number of results to fetch from JSON document
+     * @param asyncResultListener An interface with fillView method, that must be implemented in MainFragment
+     */
     public DataDownloader(int cityId, int limit, AsyncResultListener asyncResultListener) {
         this.cityId = cityId;
         this.asyncResultListener = asyncResultListener;
@@ -38,10 +36,11 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
     }
 
     /**
-    * This async method opens an HttpURLConnection with OpenWeatherMap API, reads JSON document
-    * and calls parseJSON function from utils to assign data to ArrayList
-    * @return null
-    */
+     * This async method opens an HttpURLConnection with OpenWeatherMap API, reads JSON document
+     * and calls parseJSON function from utils to assign data to ArrayList
+     *
+     * @return null
+     */
     @Override
     protected Void doInBackground(Void... params) {
         data = new ArrayList<>();
@@ -65,8 +64,8 @@ public class DataDownloader extends AsyncTask<Void, Void, Void> {
     }
 
     /**
-    * Called after doInBackground method is executed
-    */
+     * Called after doInBackground method is executed
+     */
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
