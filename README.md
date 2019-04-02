@@ -8,4 +8,4 @@ App uses OpenWeatherMap API https://openweathermap.org/api
 [Yunad Adam](https://gitlab.com/Yunad)<br />
 [JakubFromSie](https://gitlab.com/JakubFromSie)
 
-<a href="https://ibb.co/xXL8QRJ"><img src="https://i.ibb.co/PFjz8fw/Screenshot-2019-04-02-22-40-50-680-pl-pzjapp-project.png" alt="Screenshot-2019-04-02-22-40-50-680-pl-pzjapp-project" border="0"></a>
+<a href="https://ibb.co/xXL8QRJ"><img src="https://i.ibb.co/PFjz8fw/Screenshot-2019-04-02-22-40-50-680-pl-pzjapp-project.png" alt="Screenshot-2019-04-02-22-40-50-680-pl-pzjapp-project" border="0" width=360 height=640></a>
